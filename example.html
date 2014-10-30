@@ -1,83 +1,87 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-            window.CKEDITOR_BASEPATH = 'js/plugins/ckeditor/';
-        </script>
+JS guiClass
+===================
 
+This class can be used for fast and easy interface generation with javascript and html. It includes the most important field types and is easy to include
+
+----------
+
+
+Getting Started
+-------------
+
+If you want to use the guiClass within any of your HTML pages you need to add these three lines of code:
+
+            <script>window.CKEDITOR_BASEPATH = 'js/plugins/ckeditor/';</script>
         <script type="text/javascript" src="JS/plugins.js"></script>
-        <script type="text/javascript" src="JS/class.js"></script>
-        <script>
+        <script type="text/javascript" src="JS/class_gui.js"></script>
+
+> **Note:**
+
+> - To use the upload functionality, you also still ne to write the server side scripts.
+
+
+#### <i class="icon-file"></i> Create a Formular
+
+When you added all the necessary files to your script you can easily create Formulars:
+
+    
+
+initialize form arrays
+
+    var fieldArray = [];
+    var options = [];
+
+define headline
+
+    options['headline'] = 'Create user';
+
+define submit action
+
+    options['action'] = function(){
+        //executed on submit
+    };
+    options['buttonTitle'] = 'Save';
         
-            
-        var fieldArray = [];
-        var options = [];
-        options['headline'] = 'Create user';
-        options['action'] = function(){
-            console.log($('#username').val(), $('#usergroup').val(), $('#password').val(), $('#firstname').val(), $('#lastname').val());
-            alert('Submitted');
-        };
-        options['buttonTitle'] = 'Save';
+first field
+
+    var field0 = []; //initlize new array
+    field0['caption'] = 'Username';
+    field0['inputName'] = 'username';
+    field0['type'] = 'text';
+    fieldArray[0] = field0; //add array 
+
+second field
+
+    var field1 = []; //initlize new array
+    field1['caption'] = 'Firstname';
+    field1['inputName'] = 'firstname';
+    field1['type'] = 'wysiwyg';
+    fieldArray[1] = field1; //add array
+
+third field
         
-        
-        var field0 = [];
-        field0['caption'] = 'Username';
-        field0['inputName'] = 'username';
-        field0['type'] = 'text';
-        fieldArray[0] = field0;
-        
-        var captions = ['admin', 'moderator', 'standard-user'];
-        var group_ids = ['admin', 'moderator', 'standard-user'];
-        
-        var field1 = [];
-        field1['caption'] = 'Usergroup';
-        field1['inputName'] = 'usergroup';
-        field1['values'] = group_ids;
-        field1['captions'] = captions;
-        field1['type'] = 'dropdown';
-        fieldArray[1] = field1;
-        
-        var field2 = [];
-        field2['caption'] = 'Firstname';
-        field2['inputName'] = 'firstname';
-        field2['type'] = 'text';
-        fieldArray[2] = field2;
-        
-        var field3 = [];
-        field3['caption'] = 'Lastname';
-        field3['inputName'] = 'lastname';
-        field3['type'] = 'text';
-        fieldArray[3] = field3;
-               
-        var field4 = [];
-        field4['caption'] = 'Password';
-        field4['inputName'] = 'password';
-        field4['type'] = 'password';
-        fieldArray[4] = field4;
-        
-        var field5 = [];
-        field5['caption'] = 'Repeat password';
-        field5['inputName'] = 'repeat_password';
-        field5['type'] = 'password';
-        fieldArray[5] = field5;
-        
-        $(document).ready(function(){
-            gui.createForm('#content',fieldArray, options);
-        });
-            
-            
-        </script>
-    </head>
-    <body>
-        <div>TODO write content</div>
-        <div id="content"></div>
-    </body>
-</html>
+    var field2 = []; //initlize new array
+    field2['caption'] = 'Lastname';
+    field2['inputName'] = 'lastname';
+    field2['type'] = 'text';
+    fieldArray[2] = field2; //add array
+    
+load formular into #content
+
+    gui.createForm('#content',fieldArray, options);
+
+
+####  Add uploader to the Formular
+
+You can easily add an upload field to your form. Just choose 'file' as type and the field will be added to your form.
+
+The guiClass uses "uploadify" for the upload, a third party plugin which sends all the file_data to a script, defined in the gui config.
+
+
+#### wysiwyg editor
+
+You can easily add an wysiwyg editor to your form. Just choose 'wysiwyg' as type and the editor will be added to your form.
+
+#### custom html
+
+You can delete the current document by clicking <i class="icon-trash"></i> **Delete document** in the document panel.
